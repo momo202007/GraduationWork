@@ -1,0 +1,287 @@
+@startuml class1
+skin rose
+left to right direction
+package python{
+    package model{
+        class model{
+        }
+
+        class PatientUsers{
+            +patient_id:str
+            +patient_password:str
+            +patient_birthday:datetime
+            +patient_symptoms:str
+            +patient_completed:bool
+            +is_delete:bool
+            +gender:str
+            +___str___()
+        }
+
+        class SupporterUsers{
+            +supporter_id:str
+            +supporter_password:str
+            +patient_id:str
+            +connections:bool
+            +supporter_email:str
+            +is_delete:bool
+            +diary_mail:bool
+            +___str___()
+        }
+
+        class Diary{
+            +diary_id:int
+            +patient_id:str
+            +diary_date:datetime
+            +diary_text:str
+            +diary_images:str
+            +___str___()
+        }
+
+        class Experience{
+            +patient_id:str
+            +experience_text:str
+            +experience_date:datetime
+            +___str___()
+        }
+
+        class Calender{
+            +patient_id:str
+            +calender_date:datetime
+            +calender_text:str
+            +___str___()
+        }
+
+        class Training{
+            +patient_id:str
+            +collection_id_list:list
+            +training_id:int
+            +training_stage:int
+            +___str___()
+        }
+
+        class CollectionInformation{
+            +collection_id:int
+            +training_image_list:list
+            +___str___()
+        }
+
+        class Post{
+            +post_id:int
+            +stamp_id_list:list
+            +patient_id:str
+            +post_text:str
+            +post_date:datetime
+            +___str___()
+        }
+
+        class StampInformation{
+            +stamp_pass:str
+            +stamp_id:int
+            +___str___()
+        }
+
+        class SnsGroup{
+            +post_id_list:list
+            +group_id:int
+            +patient_id_list:list
+            +___str___()
+        }
+
+        class Todo{
+            +todo_id:int
+            +patient_id:str
+            +todo_text:str
+            +todo_deletion:bool
+            +todo_references:bool
+            +rehab_id:int
+            +achievement_list:list
+            +___str___()
+        }
+
+        class RehabMenu{
+            +rehab_id:int
+            +rehab_text:str
+            +patient_symptoms_list:list
+            +___str___()
+        }
+
+        model<|-- PatientUsers
+        model<|-- SupporterUsers
+        model<|-- Diary
+        model<|-- Experience
+        model<|-- Calender
+        model<|-- Training
+        model<|-- CollectionInformation
+        model<|-- Post
+        model<|-- StampInformation
+        model<|-- SnsGroup
+        model<|-- Todo
+        model<|-- RehabMenu
+
+    }
+
+    package views{
+        class views{
+            ' 患者
+            +first_password_set(request)
+            +diary_menu(request)
+            +diary_post(request)
+            +diary_editing(request)
+            +extracted_from_diary_editing(request)
+            +sns_menu(request)
+            +sns_post(request)
+            +timeline(request)
+            +sns_reference(request)
+            +calendar(request)
+            +happy_register(request)
+            +happy_editing(request)
+            +happy_rederence(request)
+            +next_happyday(request)
+            +ToDO_menu(request)
+            +ToDO_list(request)
+            +ToDO_add(request)
+            +ToDO_delete(request)
+            +ToDO_reference(request)
+            +collection_list(request)
+            +training_select(request)
+            +rehab_complete_top(request)
+            +experience_register(request)
+            +experience_editing(request)
+            +id_conf(request)
+            +pass_conf(request)
+            
+            ' サポーター
+            +supporter_top(request)
+            +signup(request)
+            +supporter_ToDO(request)
+            +withdrawal(request)
+            +rehab_complete(request)
+            +info_confirmation(request)
+            +info_change(request)
+
+            ' 共有
+            +top(request)
+            +login(request)
+            +password_reset(request)
+            +next_top(request)
+            +ID_search(request)
+            +done_set(uid)
+            +diary_list(request)
+            +diary_reference(request)
+        }
+    }
+}
+@enduml
+@startuml class2
+skin rose
+left to right direction
+package python{
+
+    package forms{
+        class forms{
+        }
+        ' 共通項目
+        class LoginForm{
+            +user_id_textbox:str
+            +user_pw_textbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Pw_resetForm{
+            +pw_reset_textbox:str
+            +pw_reset_check_textbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        '患者
+        class First_pw_settingForm{
+            +first_pw_id_textbox:str
+            +first_pw_textbox:str
+            +first_pw_check_textbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Sns_postFrom{
+            +sns_inputbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Diary_newpostFrom{
+            +diary_inputbox:str
+            +diary_image:img
+            +__init__(self, *args, **kwargs)
+        }
+        class Happy_registrationForm{
+            +calendar_inputbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Happy_editingForm{
+            +calendar_editingbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Experience_registrationForm{
+            +experience_inputbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Experience_editingForm{
+            +experience_editingbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Rehab_todo_addForm{
+            +todo_inputbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        'サポーター
+        class Sign_upFrom{
+            +email_box:str
+            +pw_textbox:str
+            +pw_check_textbox:str
+            +birth_date:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Supporter_rehab_todo_addForm{
+            +supporter_todo_inputbox:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Information_changeForm{
+            +information_birth_date:str
+            +__init__(self, *args, **kwargs)
+        }
+        class Pass_confForm{
+            +user_id_textbox:str
+            +user_email_box:str
+            +__init__(self, *args, **kwargs)
+        }
+
+        forms<|-- First_pw_settingForm
+        forms<|-- Pw_resetForm
+        forms<|-- LoginForm
+        forms<|-- Happy_registrationForm
+        forms<|-- Happy_editingForm
+        forms<|-- Diary_editingForm
+        forms<|-- Diary_newpostFrom
+        forms<|-- Sns_postFrom
+        forms<|-- Experience_editingForm
+        forms<|-- Experience_registrationForm
+        forms<|-- Rehab_todo_addForm
+        forms<|-- Supporter_rehab_todo_addForm
+        forms<|-- Information_changeForm
+        forms<|-- Sign_upFrom
+        forms<|-- Pass_confForm
+    }
+}
+
+' JS
+package js{
+class script{
+    +posting(id)
+    +popup(title, type, transmittable)
+    +pass_conf(request)
+    +randomCharactor(c)
+    +function (i)
+    +aleat(url)
+    +aleatmanual(session, path)
+    +back_func(form_name, locationname)
+    +post_func(form_name, innertext, title)
+    +function (e)
+    +PageTopAnime( )
+}
+}
+
+@enduml

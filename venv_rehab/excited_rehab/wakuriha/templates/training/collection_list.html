@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block one_back %}{% endblock %}
+{% block back_to_menu_text %}戻る{% endblock %}
+{% load static %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block body %}
+<form method="post" action="{% url 'wakuriha:top' %}">
+    {% csrf_token %}
+    
+    <div class="margin_top calendar_diary">
+    <center>
+      {% if not done %}
+        <text class="login_text">現在育成中：</text>
+        {% else %}
+        <text class="login_text">すべての育成要素を達成しました！！！</text>
+        {%endif%}
+    {% for img in imgs %}
+    {% if done%}
+      {% if forloop.counter0 != 0%}
+      <text class="login_text">{{ img.0 }}</text>
+      <br><br>
+      <img src="{% static img.1|add:'.png' %}" class="popup example9">
+      {%endif%}
+    {%elif not done %}
+    <text class="login_text">{{ img.0 }}</text>
+    <br><br>
+    <img src="{% static img.1|add:'.png' %}" class="popup example9">
+    {%endif%}
+    {% comment %} <button class="training_serect_image" name="training_view" value="{{ img.1 }}"><img class="example9" width="250" height="250" src="{% static img.1 %}"/></button> {% endcomment %}
+        <br><br>
+        <hr>
+        <div id="modal-container">
+          <div class="container_top collection">
+            <div class="container_top_child leftcollection">
+              <center>
+              <p id="container_text"></p>
+              </center>
+            </div>
+            <div class="container_top_child right img-container--table-cell">
+              <img class="collection_image" src="">
+            </div>
+          </div>
+          <button type="button" class="close dialog_yes_no">閉じる</button>
+          
+        </div>
+        
+
+              
+                        {% comment %} producted by Haruka Amatatsu {% endcomment %}
+ 
+                      
+{% endfor %}
+{% comment %} {% if messages %}
+{% for message in messages %}
+<input id ="training_view" type="hidden" value={{ message }}>
+<div class="modal training_view">
+    <img class="tra_view"  src="{% static  message  %}"/>
+    <br><br>
+  <button type="button" class="dialog_yes_no close" >閉じる</button>
+  </div>
+{% endfor %}
+{% endif %} {% endcomment %}
+    <br><br><br>
+    {% comment %} <button class="training_serect" >完了</button> {% endcomment %}
+</center>
+    </form>
+    <div>
+        
+     <script>
+        const modal = $('#modal-container');
+        const close = $('.close');
+        const img = modal.find('img');
+        var testinfo = document.getElementById("container_text");
+        $('img.popup').each(function(index) {
+          $(this).click(function() {
+            img.attr('src', $(this).attr('src'));
+            if(($(this).attr('src')) == "/static/images/training/dimor_4.png.png"){
+              testinfo.innerHTML ="<br>花言葉は「富」「豊富」<br>特徴<br>ディモルフォセカの花は晴れた日の日中にのみ開き、夕方になると閉じる性質があります。一日を通して花の変化を楽しめるところもディモルフォセカの魅力の1つです。"
+            }else if(($(this).attr('src')) =="/static/images/training/pansy_4.png.png"){
+              testinfo.innerHTML ="<br>紫の花言葉は「思慮深い」<br>黄色の花言葉は「つつましい幸せ」「田園の喜び」。白の花言葉は「温順」です。全般の花言葉は「もの思い」「私を思って」。<br>特徴<br>少しうつむきがちに咲く花が物思いにふける人の顔に似ていることから名づけられました。";
+            }else if(($(this).attr('src')) =="/static/images/training/tomato_4.png.png"){
+              testinfo.innerHTML ="特徴<br>トマトは美肌効果のあるビタミンC、老化を抑制するビタミンEが豊富で、ミネラルや食物繊維などをバランスよく含んでいます。健康に良い栄養素をバランスよく含んだ夏野菜です。 このことから、昔のヨーロッパでは、「トマトが赤くなると医者が青くなる」と言われたのだそうです。";
+            }else if(($(this).attr('src')) =="/static/images/training/nasu_4.png.png"){
+              testinfo.innerHTML ="特徴<br>色はふつう紫色であるが、中には緑色、白色のものがある。果肉は密度が低くスポンジ状である。ヘタの部分にはトゲが生えているものがあり、鋭いトゲは鮮度を見分ける方法の目安となるが、収穫の作業性向上や実に傷がつくという理由から棘の無い品種も開発されている。";
+            }else if(($(this).attr('src')) =="/static/images/training/lily_4.png.png"){
+              testinfo.innerHTML ="<br>花言葉は「純潔」「威厳」<br>特徴<br>漢字の「百合」は、百合の花の鱗片がたくさん重なっているところかきていると言われています。";
+            }else if(($(this).attr('src')) =="/static/images/training/paprika_4.png.png"){
+              testinfo.innerHTML ="特徴<br>パプリカは肉厚で部屋数が3–4室に分かれた綺麗なベル形を形成する品種である。パプリカの果実はやや大型で肉厚となり、辛みがない、もしくはほとんどない。果実の色は、赤色、オレンジ色、黄色が主流だが、白色、黒色、紫色もある。";
+            }else if(($(this).attr('src')) =="/static/images/training/poinsettia_4.png.png"){
+              testinfo.innerHTML ="花言葉は「私の心は燃えている」「祝福する」<br>「幸運を祈る」「聖夜」「清純」<br>特徴<br>日本では11月から12月ごろに茎の上にある葉が赤や桃色や乳白色に美しく色付く。クリスマスが近くなると花屋に鉢物が出回ることから「クリスマスフラワー」とも呼ばれる";
+            }else{
+              testinfo.innerHTML ="これからの成長が楽しみですね。。。！！";
+            }
+            
+            modal.fadeIn();
+          })
+        });
+        
+        close.click(function() {
+          modal.fadeOut();
+        });
+        </script>
+{% endblock %}

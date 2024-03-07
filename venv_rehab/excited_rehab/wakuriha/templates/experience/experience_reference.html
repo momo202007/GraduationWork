@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block test %}<input type="button" class="nav-link back_expreience" value="戻る">{% endblock %}
+{% block body %}
+{% csrf_token %}
+<div class="happy_register experience_ref_edit">
+<center>
+<textarea class="calendar_exprience_form_control" readonly>{{ experience }}</textarea><br>
+<input class="simple_square_btn diary_calendaredit_regit" mobile type="button" value="編集する">
+{% comment %} <a href="{% url 'wakuriha:experience_editing' %}" class="simple_square_top_bottom">編集</a> {% endcomment %}
+</center>
+</div>
+<script>
+    $('.diary_calendaredit_regit').on('click',function(){
+        location.href="{% url 'wakuriha:experience_editing' %}"
+    })
+</script>
+{% endblock %}

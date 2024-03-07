@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+<div id="overlay">
+    <div class="cv-copy">
+        <h2>画面が切り替わるまでしばらくお待ちください...</h2>
+        <p>※ブラウザを閉じないで下さい。</p>
+    </div>
+    <div class="cv-spinner">
+        <span class="spinner"></span>
+    </div>
+</div>
+  <form method="post"  id="submit" name="form" enctype="multipart/form-data">
+      {% csrf_token %}
+   <text class="calendar_diary_day">{{date}}</text>
+   <br><br>
+   <center>
+   <label class="simple_square_btn imageup">
+    画像をアップロード
+    {{ form.diary_image }}
+    </label>
+   </center>
+   <div class="box27">
+    内容を入力して、「投稿する」ボタンをおしてください！＊１０００文字以上は入力できません。
+    </div>
+   {{ form.diary_inputbox }}
+    <div class="postbutton">
+      <button class="simple_square_btn diary_calendaredit_regit mobile modal-open" >投稿する</button>
+    </div>
+</form>
+      {% endblock %}

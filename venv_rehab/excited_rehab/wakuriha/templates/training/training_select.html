@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block header %}
+{% endblock %}
+{% load static %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block body %}
+<div class="margin_top calendar_diary">
+<form method="post" action="{% url 'wakuriha:top' %}">
+    {% csrf_token %}
+    <input id ="done_image" type="hidden" value={{ done_image }}>
+    <input id ="done" type="hidden" value={{ done }}>
+    {% comment %} {% if messages %}
+{% for message in messages %}
+<input id ="todo_test" type="hidden" value={{ message }}>
+{% endfor %}
+{% endif %} {% endcomment %}
+    <center>
+        <font class="login_text" color='#696969'><text id= "login_text">育成する要素<br>　を選択してください。</text></font>
+        {% comment %} {{done_img}}
+        <img class="top_image" src=" {% static done_img %} " alt=""> {% endcomment %}
+    {% for image in images %}
+        <p class="login_text">{{ image.2 }}</p>
+        <button class="training_serect_image" name="training" value="{{ image.0 }}"><img class="example9" width="250" height="250" src="{% static image.1 %}"/></button>
+        <br><br>
+        <hr>
+    {% endfor %}
+    
+    {% comment %} <button class="training_serect" >完了</button> {% endcomment %}
+</center>
+    </form>
+    <div>
+{% endblock %}

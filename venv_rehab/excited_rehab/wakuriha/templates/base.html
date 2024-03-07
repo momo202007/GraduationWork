@@ -1,0 +1,49 @@
+
+{% load static %}
+<html lang="ja" encoding="utf-8">
+  <head>
+    
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <link href="{% static 'css/destry.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/style.css' %}" rel="stylesheet"/>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+  <link rel="icon" href="{% static 'images/check.png' %}" />
+  </head>
+  <body>
+    {% block header %}
+    <header>
+        {% comment %} <a class="nav-link" href="/" >ホームへ</a> {% endcomment %}
+        <input type="button" class="nav-link home" value={% block back_to_menu_text %}"ホームへ"{% endblock %}>
+      {% block one_back %}
+            {% block replay %}<button class="replay"><img class="replay_icon" src="{% static 'images/question.png' %}"/></button>{% endblock %}
+            {% block test %}<input type="button" class="nav-link back" value="戻る">{% endblock %}
+      {% endblock %}
+    </header>
+    {% endblock %}
+    
+      {% block body %}
+      
+      {% endblock %}
+      {% block dialog %}
+      <center>
+      <div class="modal dialog2">
+        <text id="innerHTML" class="login_text"></text>
+        <br><br>
+        <input type="button" class="dialog_yes_no post" value="はい">
+              <input type="hidden"  name={{name}}>
+        <br><br>
+        <button type="button" class="dialog_yes_no close" >いいえ</button>
+      </div>
+    </form>
+      </center>
+      {% endblock %}
+      <p id="page-top"><a href="#"><span></span></a></p>
+      <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://coco-factory.jp/ugokuweb/wp-content/themes/ugokuweb/data/8-1-8/js/8-1-8.js"></script>
+  </body>
+</html>

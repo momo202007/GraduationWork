@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block replay %}{% endblock %}
+{% block body %}
+<center>
+  <div class="margin_top calendar_diary">
+<form method='POST' id="submit" name="form" action="{% url 'wakuriha:happy_rederence' %}">
+{% csrf_token %}
+<text class="calendar_diary_day">{{ day }}</text>
+<br><br><br>
+{{ form.calendar_editingbox }}
+<br>
+    <input class="simple_square_btn diary_calendaredit_regit mobile modal-open" type="submit" value="更新する">
+</div>
+</center>
+{% endblock %}

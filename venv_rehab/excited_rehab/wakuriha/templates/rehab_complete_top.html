@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block back_to_menu_text %}
+ホーム
+{% endblock %}
+{% block one_back %}
+{% block header %}
+<form method='POST' id="submit" action="{% url 'wakuriha:login' %}">
+  {% csrf_token %}
+    <header>
+        {% comment %} <a class="nav-link" href="/" >ホームへ</a> {% endcomment %}
+        <input type="button" class="nav-link home" value=ホームへ>
+      {% block one_back %}
+            {% block replay %}{% endblock %}
+            
+            {% block test %}<input type="button" class="nav-link logoutmodal-open" value=ログアウト>{% endblock %}
+      {% endblock %}
+    </header>
+</form>
+    {% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+  <br>
+<center>
+  <text class="login_text">リハビリ完了<br>おめでとうございます!</text>
+    
+<div class="collection">
+  <a href="{% url 'wakuriha:sns_menu' %}" class="simple_square_btn big support">SNS</a>
+</div>
+<div class="password_reset">
+    <a href="{% url 'wakuriha:diary_menu' %}" class="simple_square_btn big support">日記</a>
+  </div>
+  <div class="password_reset">
+    <a href="{% url 'wakuriha:experience_register' %}" class="simple_square_btn big support">経験談<i id="complate_icon" class="fas fa-star fa-spin" style="color: red"></i></a>
+  </div>
+  <div class="password_reset">
+    <a href="{% url 'wakuriha:collection_list' %}" class="simple_square_btn big support">コレクション</a>
+  </div>
+  <div class="password_reset">
+    <a href="{% url 'wakuriha:password_reset' %}" class="simple_square_btn big support">パスワード再設定</a>
+  </div>
+  
+</center>
+</div>
+{% block form %}
+{% endblock %}
+<script>
+  $('.close').click(function(){
+    $('.modal').fadeOut();
+  })
+</script>
+{% endblock %}

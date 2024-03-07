@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block one_back %}{% endblock %}
+{% block back_to_menu_text %}戻る{% endblock %}
+{% load static %}
+{% block back_urls %}href="{% url 'wakuriha:sp_top' %}"{% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+<center>
+<table style="display: table-cell; vertical-align: middle;">
+    <br><br><br><text class="info_text">あなたの情報</text>
+    <thead >
+        <tr>
+            <th class="info_text">あなたのID       　　 :</th>
+            <th class="info_text">{{ sp_id }}</th>
+        </tr>
+        <tr>
+            <th class="info_text">患者様との関係性:</th>
+            <th class="info_text">{{ connections }}</th>
+        </tr>
+    </thead>
+</table>
+</center>
+<center>
+    <hr>
+<table style="display: table-cell; vertical-align: middle;">
+    <br><text class="info_text">患者様の情報</text>
+    <thead>
+        <tr>
+            <th class="info_text">患者様のID:</th>
+            <th class="info_text">{{ p_id }}</th>
+        </tr>
+        <tr>
+            <th class="info_text">生年月日 　:</th>
+            <th class="info_text">{{ birth }}</th>
+        </tr>
+        <tr>
+            <th class="info_text">性別    　　　:</th>
+            <th class="info_text">{{ gender }}</th>
+        </tr>
+        <tr>
+            <th class="info_text">症状別分類 :</th>
+            <th class="info_text">{{ symptoms }}</th>
+        </tr>
+    </thead>
+</table>
+</center>
+<center>
+<a href="{% url 'wakuriha:info_change' %}" class="simple_square_btn big">変更する</a>
+<br><br>
+{% endblock %}
+</center>
+
+

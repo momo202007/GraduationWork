@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block body %}
+{% load static %}
+<div class="margin_top calendar_diary">
+  <br>
+<form method="post" id="submit" action="{% url 'wakuriha:sns_reference' %}">
+    {% csrf_token %}
+    <center>
+    {% for post in posts reversed %}
+    
+      {% if messages %}
+      
+    {% for message in messages %}
+    <input name ="sns_id_del" id ="del" type="hidden" value={{ message }}>
+    {% endfor %}
+  {% endif %}
+  <input id ="len" type="hidden" value={{ post.1 }}>
+      <div class="container_sns">
+          <div class="left">
+              <img class="sns_referenceimage" src="{% static post.4 %}"/>
+          </div>
+          <div class="right">
+              <text class="sns_referencedate">{{ post.3 }}<text>
+          </div>
+      </div>
+      <textarea id="timeline" class="sns_form-control time_refe" readonly>{{ post.2 }}</textarea>
+      <br><br>
+        {% comment %} <div class="acbox-under"><img class="box" width="100" height="100" src="{% static 'images/training/dimor_4.png' %}"/><img class="box" width="100" height="100" src="{% static 'images/dimor_4.png' %}"/></div> {% endcomment %}
+        <details>
+        <summary><div class="acbox-under">スタンプ一覧</div></summary>
+        {% for two_img in post.1 %}
+          <div class="acbox-under">
+          {% for img in two_img %}
+            <img class="box" width="100" height="100" src="{% static img %}"/>
+          {% endfor %}
+          </div>
+        {% endfor %}
+      </details>
+      <button name="delete" class="simple_square_btn sns_del_stamp"  value ="{{ post.0 }}" >削除</button>
+      {% comment %} <input name="delete" class="simple_square_btn_timeline modal-button" value="削除"> {% endcomment %}
+      <br>
+      <hr>
+      <br>
+      {% empty %}
+      <text class="empty_text">投稿がありません。</text>
+    {% endfor %}
+</center>
+</div>
+{% endblock %} 

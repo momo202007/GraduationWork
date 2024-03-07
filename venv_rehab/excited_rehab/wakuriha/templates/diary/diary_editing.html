@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block replay %}{% endblock %}
+{% block body %}
+{% for diary in diary_list %}
+<div class="margin_top calendar_diary">
+      <br>
+        <form method="post" id="submit" name="form">
+          {% csrf_token %}
+          <text class="calendar_diary_day">{{date}}</text>
+          <br><br>
+          <textarea id="dary_editing" class = "diary_form-control edit" name = "editing_diary" rows="13" cols="50" maxlength="1000">{{diary.diary_text}}</textarea>
+          <br>
+          <button type="button" class="simple_square_btn diary_calendaredit_regit mobile modal-open">更新する</button>
+{% endfor %}
+      {% endblock %}

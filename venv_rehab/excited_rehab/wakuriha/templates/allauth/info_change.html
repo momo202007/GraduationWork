@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block one_back %}{% endblock %}
+{% block back_to_menu_text %}戻る{% endblock %}
+{% load static %}
+{% block back_urls %}href="{% url 'wakuriha:sp_top' %}"{% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+<form method='POST' id="submit" name="form" action="{% url 'wakuriha:info_confirmation' %}">
+{% csrf_token %}
+<center>
+<text class="info_text">あなたの情報</text>
+<br><br>
+<div class="radiobox">
+    <text class="info_text">患者様との関係性</text>
+    {% if connections == '家族' %}
+	<input id="radio1" class="radiobutton" name="relation" type="radio" value="家族" checked="checked"/>
+	<label for="radio1">家族</label>
+    <br>
+	<input id="radio2" class="radiobutton" name="relation" type="radio" value="病院関係者"/>
+	<label for="radio2">病院関係者</label> 
+    {% elif connections == '病院関係者' %}
+	<input id="radio1" class="radiobutton" name="relation" type="radio" value="家族"/>
+	<label for="radio1">家族</label>
+    <br>
+	<input id="radio2" class="radiobutton" name="relation" type="radio" value="病院関係者" checked="checked"/>
+	<label for="radio2">病院関係者</label>     
+    {% endif %}
+</div>
+
+<br><hr><br>
+<text class="info_text">患者様の情報</text>
+<br><br>
+<text class="info_text">生年月日</text>
+<br>
+<font color='#f08080' id="login_red" class="login_text">*西暦で入力してください<br>例:1877-03-06</font>
+<br>
+{{ birth.birth_date }}
+
+<br>
+<text class="info_text">性別</text>
+<br>
+<select name='gender'class="custum-pull">
+    <option value="男性" {% if gender == "男性" %}selected{% endif %}>男性</option>
+    <option value="女性" {% if gender == "女性" %}selected{% endif %}>女性</option>
+    <option value="未選択" {% if gender == "未選択" %}selected{% endif %}>選択しない</option>
+</select>
+<br>
+<text class="info_text">症状別分類</text>
+<br>
+<select name="symptoms" class="custum-pull" size="1">
+    <option value="脳卒中" {% if symptoms == '脳卒中' %}selected{% endif %}>脳卒中</option>
+    <option value="運動器の疾患" {% if symptoms == '運動器の疾患' %}selected{% endif %}>運動器の疾患</option>
+    <option value="脊髄損傷" {% if symptoms == '脊髄損傷' %}selected{% endif %}>脊髄損傷</option>
+    <option value="神経筋疾患" {% if symptoms == '神経筋疾患' %}selected{% endif %}>神経筋疾患</option>
+    <option value="切断（外傷）" {% if symptoms == '切断（外傷）' %}selected{% endif %}>切断（外傷）</option>
+    <option value="関節リマウチ" {% if symptoms == '関節リマウチ' %}selected{% endif %}>関節リマウチ</option>
+    <option value="心疾患" {% if symptoms == '心疾患' %}selected{% endif %}>心疾患</option>
+    <option value="呼吸器疾患" {% if symptoms == '呼吸器疾患' %}selected{% endif %}>呼吸器疾患</option>
+    <option value="摂食嚥下障害" {% if symptoms == '摂食嚥下障害' %}selected{% endif %}>摂食嚥下障害</option>
+    <option value="がん" {% if symptoms == "がん" %}selected{% endif %}>がん</option>
+    <option value="内部障害" {% if symptoms == "内部障害" %}selected{% endif %}>内部障害</option>
+</select>
+<br><br>
+<input type="button" class="simple_square_btn modal-open" name = "info_change" value="変更する">
+<div class="modal dialog2">
+    <text id="innerHTML" class="login_text"></text>
+    <br><br>
+    <input type="button" class="dialog_yes_no info_change" value="はい">
+          <input type="hidden"  name='info_change' value="はい">
+    <br><br>
+    <button type="button" class="dialog_yes_no close" >いいえ</button>
+  </div>
+  </form>
+
+{% endblock %}

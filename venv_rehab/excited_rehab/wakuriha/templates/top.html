@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block back_to_menu_text %}
+  ホーム
+{% endblock %}
+{% load static %}
+{% block header %}
+<form method='POST' id="submit" action="{% url 'wakuriha:login' %}">
+  {% csrf_token %}
+    <header>
+        {% comment %} <a class="nav-link" href="/" >ホームへ</a> {% endcomment %}
+        <input type="button" class="nav-link home" value=ホームへ>
+      {% block one_back %}
+            {% block replay %}{% endblock %}
+            {% block test %}<input type="button" class="nav-link logoutmodal-open" value=ログアウト>{% endblock %}
+      {% endblock %}
+    </header>
+</form>
+    {% endblock %}
+{% block body %}
+<div class="margin_top">
+<center>
+  <br><br><br><br>
+  <div class="container_top">
+      <div class="container_top_child left button_solid006">
+        <a href="./sns/menu" class="simple_square_btn top"><figure><img id="top_icon" src="{% static 'images/top_icon/sns.png' %}"/></figure></a>  
+      </div>
+      <div class="container_top_child right button_solid006">
+        <a href="./diary/menu" class="simple_square_btn top"><figure><img id="top_icon" src="{% static 'images/top_icon/diary.png' %}"/></figure></a>
+      </div>
+  </div>
+  <div class="container_top">
+      <div class="container_top_child left button_solid006">
+        <a href="{% url 'wakuriha:calendar' %}" class="simple_square_btn top"><figure><img id="top_icon" src="{% static 'images/top_icon/calendar.png' %}"/></figure></a>
+      </div>
+      <div class="container_top_child right button_solid006">
+        <a href="./ToDO/menu" class="simple_square_btn top"><figure><img id="top_icon" src="{% static 'images/top_icon/ToDO.png' %}"/></figure></a>
+      </div>
+  </div>
+<br>
+<div class="training">
+  <div class="container_top_training">
+      <div class="container_top_childhappy_image">
+          <img class="top_image" src=" {% static training_img %} " alt="">
+      </div>
+      <div class="container_top_child_happy">
+        <span class="pyonpyon">{{happyday}}</span>
+      </div>
+  </div>
+</div>
+
+  <div class="collection">
+    <center>
+    <a href="{% url 'wakuriha:collection_list' %}" class="simple_square_btn big">コレクション</a>
+  </center>
+  </div>
+
+  <div class="password_reset">
+    <center>
+    <a href="{% url 'wakuriha:password_reset' %}" class="simple_square_btn big">パスワード再設定</a>
+  </center>
+    <br>
+  </div>
+</center>
+</div>
+{% endblock %}

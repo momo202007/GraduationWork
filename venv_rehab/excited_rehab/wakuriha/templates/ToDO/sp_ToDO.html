@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% load static %}
+{% block body %}
+<center>
+  <form id="submit" method="post" name ="form" action="{% url 'wakuriha:sp_ToDO' %}">
+    {% csrf_token %}
+    <div class="tod_header">
+    <p class="login_text">追加項目</p>
+    {{ form }}
+    <br><br>
+    <input class="simple_square_btn sns_del_stamp modal-open" type="button" value="追加する" onClick="check();">
+    </div>
+    <br><br>
+    <center>
+    <div class="modal dialog2">
+      <text id="innerHTML" class="login_text"></text>
+      <br><br>
+      <input type="button" class="dialog_yes_no post" value="はい">
+            <input type="hidden"  name={{name}}>
+      <br><br>
+      <button type="button" class="dialog_yes_no close" >いいえ</button>
+    </div>
+  </form>
+    </center>
+    <div class="sp_todo">
+      <hr>
+  {% for todo in todo1 reversed  %}
+    <p class="login_text">{{ todo.todo_text }}</p>
+    <hr>
+  {% empty %}
+  <p>ToDOがありません。</p>
+  {% endfor %}
+
+    <center>
+  <a href="#modal" class="simple_square_btn sns_del_stamp modal-button">テンプレートから追加する</a>
+  <!-- モーダルウィンドウ内  -->
+  <div class="modal-wrapper" id="modal">
+    <form id="submit2" method="post" action="{% url 'wakuriha:sp_ToDO' %}">
+    {% csrf_token %}
+      <a href="{% url 'wakuriha:sp_ToDO' %}" class="modal-overlay"></a>
+      <div class="modal-window"id="target">
+        <div class="modal-content_todo">
+          <p>症状 : {{ symptoms.user_symptoms }}</p>
+          {% for tem_list in symptoms.templates %}
+          <table>
+            <thead style="display: table-cell; vertical-align: middle;">
+                <tr>
+                  <th><input class="chk sp_todo_check" type="checkbox" name="todo_id" value="{{ tem_list.1 }}"></th>
+                  <th class="todo_text">{{ tem_list.0 }}</th>
+                  <hr>
+                </tr>
+            </thead>
+            <tbody>
+        </table>
+          {% endfor %}
+          <hr>
+        </div>
+        <div class="modal2 dialog2">
+          <text id="innerHTML" class="login_text"></text>
+          <br><br>
+          <input class="todoadd dialog_yes_no" type="button" data-cke-saved-name='template_ToDO_add' name='template_ToDO_add' value="はい">
+                <input type="hidden" class="" name='template_ToDO_add'>
+          <br><br>
+          <button type="button" class="dialog_yes_no close" >いいえ</button>
+        </div>
+        <button class="simple_square_btn sns_del_stamp modal-open" type="button">追加する</button>
+        <a href ="" class="modal-close"><i class="far fa-times-circle"></i></a>
+      </div>
+    </form>
+  </div>
+</div>
+<br><br>
+{% block dialog %}
+{% endblock %}{% endblock %}

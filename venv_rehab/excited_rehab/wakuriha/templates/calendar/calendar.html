@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% load static%}
+{% block body %}
+<center>
+    <input id ="path" type="hidden" value={{path}}>
+    <div class="margin_top calendar">
+    <text class="calendar_year_month">{{print_year_month}}</text>
+    {% if backimage == "01" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/1.png' %}"/>
+    {% elif backimage == "02" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/2.png' %}"/>
+    {% elif backimage == "03" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/3.png' %}"/>
+    {% elif backimage == "04" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/4.png' %}"/>
+    {% elif backimage == "05" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/5.png' %}"/>
+    {% elif backimage == "06" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/6.png' %}"/>
+    {% elif backimage == "07" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/7.png' %}"/>
+    {% elif backimage == "08" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/8.png' %}"/>
+    {% elif backimage == "09" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/9.png' %}"/>
+    {% elif backimage == "10" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/10.png' %}"/>
+    {% elif backimage == "11" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/11.png' %}"/>
+    {% elif backimage == "12" %}
+    <img class="calendar_backimage" height="135" src="{% static 'images/calendar_back/12.png' %}"/>
+    {% endif %}
+    </div>
+<form method='POST' action="{% url 'wakuriha:happy_rederence' %}">
+    {% csrf_token %}
+    <br>
+{% for day in days %}
+{% for d in day %}
+{% if year_month|add:"0"|add:d in happy_days  or year_month|add:d in happy_days %}
+    <button class="simple_square_btn calendar"  name="{{ year_month }}{{ d }}">{{ d }}<i id="happy_icon" class="fas fa-star " style="color: yellow"></i></button>
+    {% else %}
+    <button class="simple_square_btn calendar"  name="{{ year_month }}{{ d }}">{{ d }}</button>
+    {% endif %}
+{% endfor %}
+    <br>
+{% endfor %}
+</form>
+    </center>
+
+<form method='POST' action="{% url 'wakuriha:calendar' %}">
+    {% csrf_token %}
+    <center>
+    <button class="simple_square_btn ago_next" name="month_ago">&lt;</button>
+    <button class="simple_square_btn ago_next"name="month_next">&gt;</button>
+    <br><br>
+    {% comment %} <button type="button" class="dialog_yes_no replay" >説明動画をもう一度見る</button> {% endcomment %}
+    </center>
+</form>
+<br><br>
+{% endblock %}
+

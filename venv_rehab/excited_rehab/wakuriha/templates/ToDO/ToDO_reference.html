@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% load static %}
+{% block body %}
+    {% for todo in todos %}
+        <div class="margin_top calendar_diary">
+            <br>
+            <center>
+            <a href="#modal-{{ todo.0 }}" class="simple_square_btn diary_list modal-button" >{{ todo.0 }}<br>{{ todo.1.1|truncatechars:10 }}</a>
+            {% comment %} モーダルウィンドウ内 {% endcomment %}
+            <div class="modal-wrapper" id="modal-{{ todo.0 }}">
+                <a href="{% url 'wakuriha:ToDO_reference' %}" class="modal-overlay"></a>
+                <div class="modal-window">
+                <div class="modal-content_todo">
+                    <p class="login_text">{{ todo.0 }}</p>
+                    {% for one_todo in todo.1 %}
+                    <hr>
+                    <p class="login_text">{{ one_todo }}</p>
+                    {% endfor %}
+                </div>
+                <a href ="" class="modal-close"><i class="far fa-times-circle"></i></a>
+                </div>
+            </div>
+    {% empty %}
+    <text class="login_text">ToDOがありません。</text>
+    {% endfor %}
+</div>
+    </center>
+{% endblock %}

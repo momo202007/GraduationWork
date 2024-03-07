@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block body %}
+<center>
+  <main>
+    <form id="submit" method="post" name ="form" action="{% url 'wakuriha:ToDO_add' %}">
+      {% csrf_token %}
+      <div class="box4">
+        追加したいリハビリ内容を入力して「追加する」ボタンをおしてください！＊３０文字以上は入力できません。
+        </div>
+      <text class="login_text">{{ hoge }}</text>
+      <br><br>
+      <div class="input">{{ form }}</div>
+      <br>
+      <br>
+      <br>
+      <input class="simple_square_btn sns_del_stamp modal-open" type="button" value="追加する" onClick="check();">
+  </main>
+</center>
+<script>
+</script>
+{% endblock %}

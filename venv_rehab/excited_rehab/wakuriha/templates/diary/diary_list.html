@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block replay %}{% endblock %}
+{% block body %}
+<br><br><br><br>
+  <form method="post" id="submit">
+    <center>
+    {% csrf_token %}
+{% if ID == 's' %}
+<div class="diary_list">
+<input id ="flag2" type="hidden" value={{ON_OFF}}>
+<font color='#f08080' id="innerHTML" class="login_text"></font>
+<br>
+    <button id="btn" type="submit" name='none' class="dialog_yes_no"></button>
+</div>
+          {% endif %}
+        </center>
+      </form>
+{% for diary in diary_list reversed %}
+<center>
+        <form method="post">
+          {% csrf_token %}
+        <br>
+            <button class="simple_square_btn diary_list" name='diary_id' value={{diary.diary_id}}>{{ diary.diary_date }}<br><br>{{ diary.diary_text|truncatechars:10 }}</button>
+          </form>
+</center>
+
+{% empty %}
+<text class="empty_text">日記がありません。</text>
+    {% endfor %}
+    <input id ="diary_list_id" type="hidden" value={{ID}}>
+    <script>
+      const text = document.getElementById('innerHTML');
+  var btnname = { True:"メールを受信", False:"受信しない"}
+  var html = { True:"＊患者様が日記を投稿した際に、<br>にメールが送信されます。", False:"＊投稿時のメール送信を<br>　オフにしました。"}
+  const btn = document.getElementById('btn');
+  const first_ON_OFF = document.getElementById('flag2');
+  if(first_ON_OFF){
+    btn.textContent = btnname[first_ON_OFF.value]
+    text.innerHTML = html[first_ON_OFF.value]
+  }
+    
+</script>
+      {% endblock %}

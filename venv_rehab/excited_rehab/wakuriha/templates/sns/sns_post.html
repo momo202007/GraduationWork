@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+  <br>
+    <form method="post" id="submit" name='form' action="{% url 'wakuriha:sns_reference' %}">
+      {% csrf_token %}
+      <div class="box23">
+        気持ちを入力して、「投稿する」ボタンをおしてください！＊３００文字以上は入力できません。
+        </div>
+      <br>
+    {{ form }}
+    <div class="postbutton">
+      <button class="simple_square_btn diary_calendaredit_regit modal-open" >投稿する</button>
+      {% comment %} <input type='submit' name='sns_post' class="simple_square_btn_post modal-open" value="投稿する"> {% endcomment %}
+    </div>
+    <div>
+      {% endblock %}

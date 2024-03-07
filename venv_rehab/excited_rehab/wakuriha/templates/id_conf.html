@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block one_back %}{% endblock %}
+{% block back_to_menu_text %}戻る{% endblock %}
+{% load static %}
+{% block back_urls %}href="/"{% endblock %}
+{% block body %}
+<form method="post" name = "form" id="submit" action="{% url 'wakuriha:id_conf' %}">
+    {% csrf_token %}
+    <main>
+    <center>
+    <p class="login_text">{{ status_message }}</p>
+    <div class="radiobox">
+        <p class="login_text">どちらのアカウントを調べたいですか？</p>
+        <input id="radio1" class="radiobutton" name="relation" type="radio" value="患者" checked="checked"/>
+        <label for="radio1">患者</label>
+        <br>
+
+        <input id="radio2" class="radiobutton" name="relation" type="radio" value="サポーター" />
+        <label for="radio2">サポーター</label>
+    </div>
+    <br>
+    <font color='#f08080'><text id= "login_red" class="login_text">登録時のメールアドレス<br>を入力してください。</text></font>
+    <br>
+    {{ form.email_box }}
+    <br><br>
+    <input type="button" class="dialog_yes_no modal-open" name = "id_conf" value="検索">
+    <input type="hidden"  name='id_conf'>
+    </center>
+    </main>
+</form>
+{% endblock %}

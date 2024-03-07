@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% load static %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+  <br>
+<form method="post" id="mainForm" action="{% url 'wakuriha:timeline' %}">
+  {% csrf_token %}
+<center>
+  {% for post in posts reversed %}
+    <div class="container_sns">
+      <div class="container_sns_child left">
+          <img class="sns_referenceimage" src="{% static post.3 %}"/>
+      </div>
+      <div class="container_sns_child right">
+          <p class="sns_referencedate">{{ post.1 }}</p>
+      </div>
+    </div>
+    <textarea id="timeline" class="sns_form-control time_refe" readonly>{{ post.0 }}</textarea>
+    <br>
+    <br>
+    <a href="#modal-{{ post.2 }}" class="simple_square_btn sns_del_stamp ">スタンプを送る</a>
+    <br>
+    <hr>
+    {% comment %} モーダルウィンドウ内 {% endcomment %}
+  <div class="modal-wrapper" id="modal-{{ post.2 }}">
+    <br>
+    <a href="{% url 'wakuriha:timeline' %}" class="modal-overlay"></a>
+    <div class="modal-window">
+      <div class="modal-content_todo">
+        <br>
+        {% for img in stamps %}
+        <button name="{{ img }}" value="{{ post.2 }}" class="stamp"><img width="400" height="400" src="{% static img %}"/></button>
+        {% comment %} <input type="hidden" name="{{ img }}" value="{{ post.2 }}"> {% endcomment %}
+        <br><br>
+        {% endfor %}
+      </div>
+      <a class="modal-close"><i class="far fa-times-circle"></i></a>
+    </div>
+  </div>
+
+  {% endfor %}
+  </center>
+  <hr>
+</form>
+</div>
+<script>
+  $(".modal-close").on("click", function () {
+    history.back();
+    return false;
+  });
+  $(".modal-overlay").on("click", function () {
+    history.back();
+    return false;
+  });
+  
+</script>
+
+{% endblock %}

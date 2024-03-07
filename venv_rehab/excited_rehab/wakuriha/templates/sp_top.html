@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block back_to_menu_text %}
+  ホーム
+{% endblock %}
+{% block header %}
+<form method='POST' id="submit" action="{% url 'wakuriha:login' %}">
+  {% csrf_token %}
+    <header>
+        {% comment %} <a class="nav-link" href="/" >ホームへ</a> {% endcomment %}
+        <input type="button" class="nav-link home" value=ホームへ>
+      {% block one_back %}
+            {% block replay %}{% endblock %}
+            
+            {% block test %}<input type="button" class="nav-link logoutmodal-open" value=ログアウト>{% endblock %}
+      {% endblock %}
+    </header>
+</form>
+    {% endblock %}
+{% block body %}
+<div class="margin_top calendar_diary">
+  <br>
+<center>
+<div class="collection">
+  <a href="diary/list/" class="simple_square_btn big support">日記を見る</a>
+</div>
+<div class="password_reset">
+  <a href="supporter/ToDO/" class="simple_square_btn big support">ToDOを追加する</a>
+</div>
+<div class="collection">
+    <a href="{% url 'wakuriha:rehab_complete' %}" class="simple_square_btn big support">リハビリ完了</a>
+  </div>
+  <div class="password_reset">
+    <a href="{% url 'wakuriha:info_confirmation' %}" class="simple_square_btn big support">登録情報確認</a>
+  </div>
+  <div class="password_reset">
+    <a href="{% url 'wakuriha:password_reset' %}" class="simple_square_btn big support">パスワード再設定</a>
+  </div>
+  <div class="password_reset">
+    <a href="{% url 'wakuriha:withdrawal' %}" class="simple_square_btn big support">退会する</a>
+  </div>
+</center>
+</div>
+{% block form %}
+{% endblock %}
+<script>
+  $('.close').click(function(){
+    $('.modal').fadeOut();
+  })
+</script>
+{% endblock %}

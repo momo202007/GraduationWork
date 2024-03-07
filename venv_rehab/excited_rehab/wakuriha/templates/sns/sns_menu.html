@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+
+  <input id ="path" type="hidden" value={{path}}>
+  <main>
+    <center class="sns_menu">
+    <a href="{% url 'wakuriha:sns_post' %}" class="simple_square_btn big">気持ちを投稿する</a>
+    <br><br><br>
+    <a href="{% url 'wakuriha:timeline' %}" class="simple_square_btn big">頑張りを応援する</a>
+    <br><br><br>
+      <a href="{% url 'wakuriha:sns_reference' %}" class="simple_square_btn big">投稿を確認する</a>
+    </center>
+  </main>
+{% endblock %}

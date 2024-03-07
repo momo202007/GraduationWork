@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block one_back %}{% endblock %}
+{% block back_to_menu_text %}戻る{% endblock %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block body %}
+<div class="margin_top">
+<form method='POST' name="form" action="{% url 'wakuriha:sp_top' %}">
+{% csrf_token %}
+<br><br><br>
+<font style="line-height:222%;" color='#444444' class="login_text"><text>メールアドレス</text></font>
+<br>
+{{ form.email_box }}
+<br>
+<br>
+<font style="line-height:222%;" color='#444444' class="login_text"><text>パスワード</text></font>
+<br>
+<font color='#f08080'><text id= "login_red" class="login_text">４桁以上１０桁以下の<br>　英数字で入力してください。</text></font>
+<br>
+<br>
+{{ form.pw_textbox }}
+<br>
+<font style="line-height:222%;" color='#444444' class="login_text"><text>パスワード再入力</text></font>
+<br>
+{{ form.pw_check_textbox }}
+<br><br>
+<font color='#444444' class="login_text"><text>患者様情報入力欄</text></font>
+<hr>
+<font color='#444444' style="line-height:222%;" class="login_text"><text>生年月日</text></font>
+<br>
+<font color='#f08080' id="login_red" class="login_text">*西暦で入力してください<br>例:1877-03-06</font>
+<br>
+
+{{ form.birth_date }}
+<br>
+<font color='#444444' style="line-height:222%;" class="login_text"><text>性別</text></font>
+<br>
+<select name="gender" class="custum-pull">
+    <option value="男性">　男性</option>
+    <option value="女性">　女性</option>
+    <option value="未選択">　選択しない</option>
+</select>
+<br>
+<font color='#444444' style="line-height:222%;" class="login_text"><text>リハビリ症状</text></font>
+<br>
+<select name="symptoms" class="custum-pull" size="1">
+    <option value="脳卒中" selected>脳卒中</option>
+    <option value="運動器の疾患">運動器の疾患</option>
+    <option value="脊髄損傷">脊髄損傷</option>
+    <option value="神経筋疾患">神経筋疾患</option>
+    <option value="切断（外傷）">切断（外傷）</option>
+    <option value="関節リマウチ">関節リマウチ</option>
+    <option value="心疾患">心疾患</option>
+    <option value="呼吸器疾患">呼吸器疾患</option>
+    <option value="摂食嚥下障害">摂食嚥下障害</option>
+    <option value="がん">がん</option>
+    <option value="内部障害">内部障害</option>
+</select>
+<br><br>
+<center>
+<font style="line-height:222%;" color='#444444' class="login_text"><text>患者様との関係性</text></font>
+<div class="radiobox">
+	<input id="radio1" class="radiobutton" name="relation" type="radio" value="家族" checked="checked" />
+	<label for="radio1">家族</label>
+    <br>
+	<input id="radio2" class="radiobutton" name="relation" type="radio" value="病院関係者" />
+	<label for="radio2">病院関係者</label>
+</div>
+<div>
+</center>
+<br>
+    <input class="simple_square_btn modal-open" type="submit"  value="新規登録">
+    <br>
+    <div class="modal-container">
+        <div class="modal-body">
+          <div class="modal-content">
+            <text class="login_text">この内容でよろしいですか？</text>
+            <br>
+            <center>
+              <button class="simple_square_btn" type="submit" name="signup">はい</button>
+            </form>
+              <br>
+              <a class="simple_square_btn modal-close">いいえ</a>
+            </center>
+          </div>
+        </div>
+      </div>
+    </center>
+
+
+{% if messages %}
+        <dialog class="dialog">
+            <form method='POST' action="{% url 'wakuriha:sp_top' %}">
+              <br>
+            <text class="sign login_text">登録完了</text>
+        {% for message in messages %}
+        {% if message in k %}
+            <p class="login_text">{{ message }}</p>
+        {% else %}
+            <p class="login_text">{{ message }}</p>
+            <input type="hidden" name="hidden_data" value={{ message }}>
+        {% endif %}
+        {% endfor %}
+        <br>
+        <text class="sign2 login_text">**上記IDを患者様に<br>お伝えいただきますよう<br>お願いいたします。</text>
+
+            {% csrf_token %}
+            <br><br>
+        <input class="simple_square_btn" type="submit" name="test" value="確認しました">
+        </form>
+    </dialog>
+{% endif %}
+<script>
+  if (document.cookie.indexOf('visited=yes') === -1) {
+    document.cookie = 'visited=yes path=/';
+    } else {
+            document.querySelector('dialog').showModal()
+        document.cookie = 'visited=yes; max-age=0';
+    }
+</script>
+{% endblock %}

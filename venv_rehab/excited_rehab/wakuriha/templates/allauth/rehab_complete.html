@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block body %}
+
+<form method='POST' id="submit" action="{% url 'wakuriha:sp_top' %}">
+{% csrf_token %}
+<main>
+<center>
+<font size="10rem" color='#696969'><text id= "login_text">本当に完了しますか？</text></font>
+<br><br><br><br>
+<input class="simple_square_btn big modal-open" type="button" value="はい">
+<input type="hidden"  name='rehab_complete'>
+</form>
+<br><br><br><br>
+<a class="simple_square_btn big" href="{% url 'wakuriha:sp_top' %}">いいえ</a>
+</center>
+</main>
+{% endblock %}

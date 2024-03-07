@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block test %}<input type="button" class="nav-link back_calendar" value="戻る">{% endblock %}
+{% block replay %}{% endblock %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block body %}
+<center>
+    <div class="margin_top calendar_diary">
+<text class="calendar_diary_day">{{ calendar_date }}</text>
+<br><br><br>
+<textarea class="calendar_exprience_form_control" name="output_text" readonly>{{ calendar_text }}</textarea>
+<br>
+    <form method='POST' id="submit" action="{% url 'wakuriha:calendar' %}">
+        {% csrf_token %}
+<button type="button" class="simple_square_btn diary_del modal-open_calendar">削除</button>
+
+      <center>
+      <div class="modal dialog2">
+        <text id="innerHTML" class="login_text">削除しますか？</text>
+        <br><br>
+        <input type="button" class="dialog_yes_no post" value="はい">
+              <input type="hidden"  name={{name}}>
+        <br><br>
+        <button type="button" class="dialog_yes_no close" >いいえ</button>
+      </div>
+    </form>
+      </center>
+      </form>
+<form method='POST' action="{% url 'wakuriha:happy_editing' %}">
+    {% csrf_token %}
+<button class="simple_square_btn diary_edit calendar_">編集</button>
+</form>
+</div>
+{% block dialog %}
+{% endblock %}
+{% endblock %}

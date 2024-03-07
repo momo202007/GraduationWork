@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% load static %}
+{% block body %}
+<center>
+<form method="POST" id="submit" action="{% url 'wakuriha:top' %}" >
+<div class="margin_top calendar_diary">
+    <br>
+    {% for todo in original reversed %}
+    <hr>
+        {% if todo.todo_references == True %}
+        
+        <table>
+            <thead style="display: table-cell; vertical-align: middle;">
+                <tr>
+                    <th><input class="patient_todo_check" type="checkbox" disabled="disabled" data-cke-saved-name="done" name="done" value="{{ todo.todo_id }}"></th>
+                    <th class="todo_text">{{ todo.todo_text }}<img class="check" data-cke-saved-src="../../../static/images/check.png" src="../../../static/images/check.png"></th>
+                </tr>
+            </thead>
+            <tbody>
+        </table>
+        {% else %}
+        <table>
+                <thead style="display: table-cell; vertical-align: middle;">
+                    <tr>
+                        <th><input class="chk patient_todo_check" type="checkbox"  data-cke-saved-name="done" name="done" value="{{ todo.todo_id }}"></th>
+                        <th class="todo_text">{{ todo.todo_text }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+            </table>
+        {% endif %}
+    {% empty %}
+    <text class="login_text">ToDOがありません。</text>
+    {% endfor %}
+    {% csrf_token %}
+    <hr>
+    {% if messages %}
+    {% for message in messages %}
+    <input type="button" class="simple_square_btn sns_del_stamp modal-open" name="ToDO_done" value="完了する">
+  <input type="hidden" name='ToDO_done'>
+    {% endfor %}
+  {% endif %}
+
+</div>
+</form>
+{% endblock %}

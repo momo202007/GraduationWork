@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block one_back %}{% endblock %}
+{% block back_to_menu_text %}戻る{% endblock %}
+{% load static %}
+{% block back_urls %}href="/"{% endblock %}
+{% block body %}
+<form method="post" name="form" id="submit" action="{% url 'wakuriha:login' %}">
+    {% csrf_token %}
+    <main>
+        {% if messages %}
+    {% for message in messages %}
+    <input id ="no_id" type="hidden" value={{ message }}>
+    {% endfor %}
+  {% endif %}
+    <p>{{ status_message }}</p>
+    <font style="line-height:222%;" color='#444444' class="login_text"><text>IDを入力してください。</text></font>
+    <br>
+    {{ form.user_id_textbox }}
+    <br><br><br>
+    <font style="line-height:222%;" color='#444444' class="login_text"><text>メールアドレスを入力してください。</text></font>
+<br>
+    {{ form.user_email_box }}
+    <br><br><br>
+    <input type="button" class="dialog_yes_no modal-open" name = "pass_conf" value="メール送信">
+    <input type="hidden"  name='pass_conf'>
+    </main>
+</form>
+{% endblock %}

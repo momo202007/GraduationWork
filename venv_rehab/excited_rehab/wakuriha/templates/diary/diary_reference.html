@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block back_urls %}href="../list"{% endblock %}
+{% block replay %}{% endblock %}
+{% block body %}
+{% load static %}
+{% for diary in diary_list %}
+<div class="margin_top calendar_diary">
+    {% if diary.diary_images != "" %}
+    <img class="diary_images example7" src="{{ url|add:"/media/"|add:diary.diary_images }}"/>
+  {% endif %}
+  <br>
+        <text class="calendar_diary_day">{{date}}</text>
+        <form method="post" id="submit">
+          {% csrf_token %}
+          <br>
+          <textarea class="diary_form-control" name="output_text" readonly>{{ diary.diary_text}}</textarea>
+          <br>
+          {% if ID == 'k' %}
+          <button type="button" class="simple_square_btn diary_del modal-open">削除</button>
+          <button class="simple_square_btn diary_edit" name='edit'>編集</button>
+          {% endif %}
+          
+        </div>
+        <br>
+    {% endfor %}
+      {% endblock %}  
+    </form>

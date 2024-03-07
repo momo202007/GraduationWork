@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block body %}
+<form method='POST' name="form" id="submit" action="{% url 'wakuriha:experience_register' %}">
+    {% csrf_token %}
+    <div class="happy_register experience_ref_edit">
+    <center>
+{{ form }}
+<br>
+<input class="simple_square_btn diary_calendaredit_regit mobile modal-open" type="button" name = "experience_editing" value="更新する">
+<input type="hidden"  name='experience_editing'>
+    </center>
+    </div>
+{% endblock %}

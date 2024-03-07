@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block body %}
+<main>
+  <center class="diar_menu">
+    <input id ="path" type="hidden" value={{path}}>
+    <br>
+  <a href="../post" class="simple_square_btn big">新規投稿</a>
+<br><br><br><br>
+  <a href="../list" class="simple_square_btn big">投稿を確認する</a>
+  <br><br>
+    {% comment %} <button type="button" class="dialog_yes_no replay" >説明動画をもう一度見る</button> {% endcomment %}
+  </center>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% comment %} フォームとボタン以外は基本動かしてＯＫです。 {% endcomment %}
+{% block body %}
+<div class="margin_top calendar_diary">
+<form method='POST' name="form" id = "submit" action="{% url 'wakuriha:top' %}">{% csrf_token %}
+<center>
+    <div class="box54">
+        リハビリお疲れさまでした。よろしければ経験談を入力くださいませ。＊２０００文字以上は入力できません。
+        </div>
+{{ form }}
+<br>
+<input class="simple_square_btn diary_calendaredit_regit mobile modal-open" type="button" name = "experience_register" value="登録する">
+<input type="hidden"  name='experience_register'>
+</center>
+</div>
+{% endblock %}

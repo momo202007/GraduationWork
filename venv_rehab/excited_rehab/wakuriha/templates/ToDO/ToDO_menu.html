@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block back_urls %}href="/"{% endblock %}
+{% block body %}
+<main>
+<center class="ToDO_menu">
+  <input id ="path" type="hidden" value={{path}}>
+<div class="ToDO_list_add_delete">
+  <a  href="{% url 'wakuriha:ToDO_list' %}" class="simple_square_btn big">ToDOリスト</a>
+</div>
+<div class="ToDO_list_add_delete">
+  <a  href="{% url 'wakuriha:ToDO_add' %}" class="simple_square_btn big">タスクの追加</a>
+</div>
+<div class="ToDO_list_add_delete">
+  <a  href="{% url 'wakuriha:ToDO_delete' %}" class="simple_square_btn big">タスクの消去</a>
+</div>
+<div class="ToDO_list_add_delete">
+  <a  href="{% url 'wakuriha:ToDO_reference' %}" class="simple_square_btn big">成果を参照する</a>
+</div>
+{% comment %} <br><br>
+    <button type="button" class="dialog_yes_no replay" >説明動画をもう一度見る</button> {% endcomment %}
+</center>
+</main>
+
+{% endblock %}

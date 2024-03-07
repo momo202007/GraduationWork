@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block replay %}{% endblock %}
+{% block back_urls %}href="../menu"{% endblock %}
+{% load static %}
+{% block body %}
+<form method="POST" id="submit" name ="form" action="{% url 'wakuriha:ToDO_delete' %}" >
+    <div class="margin_top calendar_diary">
+    {% for todo in original reversed %}
+    <hr>
+    <table>
+        <thead style="display: table-cell; vertical-align: middle;">
+            <tr>
+                <th><input class="chk patient_todo_check" type="checkbox" name="del" value="{{ todo.todo_id }}"></th>
+                <th class="todo_text">{{ todo.todo_text }}</th>
+            </tr>
+        </thead>
+        <tbody>
+    </table>
+    {% empty %}
+    <center>
+    <text class="login_text">ToDOがありません。</text>
+    {% endfor %}
+    {% csrf_token %}
+    <center>
+        <hr>
+        {% if messages %}
+    {% for message in messages %}
+    <input type="button" class="simple_square_btn sns_del_stamp modal-open" name="ToDO_del" value="削除する">
+    <input type="hidden" class="" name="ToDO_del">
+    {% endfor %}
+  {% endif %}
+    
+</div>
+</form>
+{% endblock %}
